@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar and Login modal</title>
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      nav {
+        background-color: #333;
+        color: #fff;
+        height: 50px;
+        text-align: center;
+      }
+
+      nav ul {
+        list-style: none;
+        padding: 15px;
+        display: flex;
+        gap: 20px;
+      }
+
+      nav ul li a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      nav ul li.login {
+        margin-left: auto;
+      }
+
+      .login-form {
+        display: none;
+        min-width: 250px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 40px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+      }
+
+      .login-form form {
+        width: 100%;
+      }
+      .login-form label,
+      .login-form input,
+      .login-form input[type='submit'] {
+        display: block;
+        margin-bottom: 10px;
+        width: 100%;
+        padding: 10px;
+      }
+
+      .login-form input[type='submit'] {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+      }
+
+      .login-form input[type='submit']:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li class="login"><a href="#">Login</a></li>
+      </ul>
+    </nav>
+
+    <div class="login-form">
+      <form>
+        <label for="username">Username or Email</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          required
+          placeholder="Enter email or username"
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$|[a-zA-Z0-9._-]+"
+        />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+    <script>
+      const loginLink = document.querySelector('.login a');
+      const loginForm = document.querySelector('.login-form');
+      const loginClose = document.createElement('span');
+      loginClose.innerHTML = '&times;';
+      loginClose.classList.add('close');
+      loginForm.insertBefore(loginClose, loginForm.firstChild);
+
+      loginLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        loginForm.style.display = 'block';
+      });
+
+      loginClose.addEventListener('click', function (event) {
+        event.preventDefault();
+        loginForm.style.display = 'none';
+      });
+
+      window.addEventListener('click', function (event) {
+        if (event.target == loginForm) {
+          loginForm.style.display = 'none';
+        }
+      });
+    </script>
+  </body>
+</html>
